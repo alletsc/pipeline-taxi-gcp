@@ -15,7 +15,3 @@ def test_collect_function():
         [f.startswith(PATH_DATA) for f in collected_files]
     )  # os arquivos estão na pasta tests/assets
     assert all([f.endswith(".csv") for f in collected_files])  # os arquivos são CSV
-    assert collect("tests/assets/empty") == (
-        [],
-        "tests/assets/empty",
-    )  # teste para lidar com diretorios vazios

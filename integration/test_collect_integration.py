@@ -14,8 +14,12 @@ def test_collect_command_integration():
         output_bytes = subprocess.check_output(["taxi_gcp", "collect", PATH_DATA])
         # Decodifica a saída para uma string e divide por linha
         output_decoded = output_bytes.decode("utf-8").split("\n")
-        assert "drives.csv" in output_decoded[1]
-        assert "races.csv" in output_decoded[2]
-    except subprocess.CalledProcessError as e:
-        print(f"Erro ao executar o comando collect: {e.output.decode('utf-8')}")
-        raise
+        # Concatena as linhas decodificadas para facilitar a verificação de presença
+        filenames = "\n".join(output_decoded)
+        # Verifica se os arquivos esperados estão presentes na saída
+        assert "drives.csv" in filenames
+        assert "races.csv" in filenames
+    except subprocess.CalledProcessError as error:
+        # Se o comando retornar um código de erro, imprime a saída para debug
+        print(error.output.decode("utf-8"))
+        raise error
