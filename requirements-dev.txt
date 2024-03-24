@@ -1,2 +1,6 @@
-
-
+ipython
+ipdb
+pudb
+pytest-watch
+# Install project as editable
+-e .

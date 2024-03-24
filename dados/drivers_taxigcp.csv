@@ -1,0 +1,7 @@
+_id,salt,taxiDriverId,user,cars[0],average,busy,associatedCar,createdAt,status
+id1,salt,DriverId,user001,car1,4.0,busy,associatedCar1,2023-01-13T12:38:52,ocupado
+id2,salt,DriverId,user002,car2,4.1,busy,associatedCar2,2023-01-13T12:38:52,livre
+id3,salt,DriverId,user003,car3,4.2,busy,associatedCar3,2023-01-13T12:38:52,espera
+id4,salt,DriverId,user004,car4,4.3,busy,associatedCar4,2023-01-13T12:38:52,espera
+id5,salt,DriverId,user005,car5,4.5,busy,associatedCar5,2023-01-13T12:38:52,ocupado
+id6,salt,DriverId,user006,car6,4.6,busy,associatedCar6,2023-01-13T12:38:52,livre

@@ -1,0 +1,7 @@
+import os
+
+PATH_DATA = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "tests", "assets")
+)
+
+print(PATH_DATA)
