@@ -3,7 +3,6 @@ import os
 from logging import handlers
 
 # BOILERPLATE CODE
-# Define o nível de log baseado na variável de ambiente ou utiliza 'WARNING' como padrão.
 LOG_LEVEL = os.getenv("LOG_LEVEL", "WARNING").upper()
 # Cria uma instância do logger com o nome específico.
 log = logging.getLogger(name="taxi_gcp")

@@ -9,8 +9,8 @@ log = get_logger()
 
 def collect(path_data):
     """Coleta os arquivos de path_data e retorna uma tupla:
-    O primeiro elemento é uma lista dos caminhos completos dos arquivos coletados,
-    e o segundo é o caminho base fornecido."""
+    O primeiro elemento é uma lista dos caminhos completos dos arquivos
+    coletados, e o segundo é o caminho base fornecido."""
     try:
         # Garante que apenas arquivos (não diretórios) sejam listados
         collected_files = [
