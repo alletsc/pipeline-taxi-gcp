@@ -1,5 +1,5 @@
 
-.PHONY: install virtualenv ipython clean test test-watch testci
+.PHONY: install virtualenv ipython clean test test-watch testci lint
 
 install:
 	@echo "Instalando para desenvolvimento"
@@ -15,7 +15,14 @@ test:
 	@.venv/bin/pytest -vv -s
 
 testci:
-	@.venv/bin/pytest -v --junitxml=test-result.xml
+	pytest -v --junitxml=./test-result.xml
+
+lint:
+	@.venv/bin/flake8 --exclude=.venv,build,dist,*.egg-info
+
+fmt:
+	@.venv/bin/isort taxi_gcp integration tests
+	@.venv/bin/black taxi_gcp integration tests
 
 test-watch:
 	@.venv/bin/ptw -- -vv -s

@@ -35,4 +35,3 @@ def test_positive_files_are_in_path_data():
 def test_positive_files_are_csv():
     """Testa se os arquivos são .csv"""
     collected_files, path_data = collect(PATH_DATA)
-    

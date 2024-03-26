@@ -2,10 +2,11 @@ import argparse
 
 from taxi_gcp.core import collect
 
+
 # TODO: USAR CLICK PARA CRIAR A INTERFACE DE LINHA DE COMANDO
 def main():
     parser = argparse.ArgumentParser(
-        description="Taxi GCP: um pacote para integração com o Google Cloud Platform",
+        description="Taxi GCP: pacote para integração com o GCP",
         epilog="Use com sabedoria!",
     )
 
@@ -28,7 +29,7 @@ def main():
     parser.add_argument(
         "path_data",
         type=str,
-        help="Caminho dos arquivos a serem coletados ou diretório relevante para o subcomando",
+        help="Caminho dos arquivos a serem coletados ou diretório.",
     )
 
     args = parser.parse_args()
@@ -48,9 +49,7 @@ def main():
         try:
             # Aqui podemos invocar outros comandos conforme necessário
             # Por exemplo: globals()[args.subcommand](args.path_data)
-            print(
-                f"Subcomando {args.subcommand} selecionado, mas ainda não implementado."
-            )
+            print(f"Subcomando {args.subcommand} ainda não implementado.")
         except KeyError:
             print(f"Subcomando {args.subcommand} não implementado")
         except Exception as e:

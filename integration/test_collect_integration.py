@@ -11,10 +11,12 @@ def test_collect_command_integration():
     """Testa se o comando collect está funcionando corretamente."""
     try:
         # Executa o comando e captura a saída
-        output_bytes = subprocess.check_output(["taxi_gcp", "collect", PATH_DATA])
+        output_bytes = subprocess.check_output(
+            ["taxi_gcp", "collect", PATH_DATA]
+        )
         # Decodifica a saída para uma string e divide por linha
         output_decoded = output_bytes.decode("utf-8").split("\n")
-        # Concatena as linhas decodificadas para facilitar a verificação de presença
+        # Concatena as linhas decodificadas
         filenames = "\n".join(output_decoded)
         # Verifica se os arquivos esperados estão presentes na saída
         assert "drives.csv" in filenames
