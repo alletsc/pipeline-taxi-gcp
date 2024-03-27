@@ -1,60 +1,46 @@
-import argparse
+import os
 
-from taxi_gcp.core import collect
+import pkg_resources
+import rich_click as click
+from rich import print  # noqa
+from rich.console import Console
+from rich.table import Table
+
+from taxi_gcp import core
+
+click.rich_click.USE_RICH_MARKUP = True
+click.rich_click.USE_MARKDOWN = True
+click.rich_click.USE_RICH_PROGRESS = True
+click.rich_click.SHOW_ARGUMENTS = True
+click.rich_click.GROUP_ARGUMENTS_OPTIONS = True
+click.rich_click.SHOW_METAVARS_COLUMN = False
+click.rich_click.APPEND_METAVAR_HELP = True
 
 
-# TODO: USAR CLICK PARA CRIAR A INTERFACE DE LINHA DE COMANDO
+@click.group()
+@click.version_option(pkg_resources.get_distribution("taxi_gcp").version)
 def main():
-    parser = argparse.ArgumentParser(
-        description="Taxi GCP: pacote para integração com o GCP",
-        epilog="Use com sabedoria!",
-    )
-
-    parser.add_argument(
-        "subcommand",
-        type=str,
-        help="Subcomando a ser executado",
-        choices=(
-            "collect",
-            "send-bucket",
-            "send-bq",
-            "list-bucket",
-            "read-bq",
-            "transform",
-            "create-dash-table",
-            "read-dash-table",
-        ),
-    )
-
-    parser.add_argument(
-        "path_data",
-        type=str,
-        help="Caminho dos arquivos a serem coletados ou diretório.",
-    )
-
-    args = parser.parse_args()
-
-    # Tratamento específico para o comando 'collect'
-    if args.subcommand == "collect":
-        try:
-            collected_files, path_data = collect(args.path_data)
-            print(f"Coletados {len(collected_files)} arquivos de: {path_data}")
-            for file in collected_files:
-                print(file)
-        except Exception as e:
-            print(f"Erro ao executar {args.subcommand}: {e}")
-    else:
-        # # Estrutura preparada para expansão para outros comandos
-        # if args.subcommand == "send-bucket":
-        try:
-            # Aqui podemos invocar outros comandos conforme necessário
-            # Por exemplo: globals()[args.subcommand](args.path_data)
-            print(f"Subcomando {args.subcommand} ainda não implementado.")
-        except KeyError:
-            print(f"Subcomando {args.subcommand} não implementado")
-        except Exception as e:
-            print(f"Erro ao executar {args.subcommand}: {e}")
+    """Taxi-GCP: pacote para integração com o GCP"""
 
 
-if __name__ == "__main__":
-    main()
+@main.command()
+@click.argument("path_data", type=click.Path(exists=True))
+def collect(path_data):
+    """Coleta arquivos de um diretório e retorna uma tupla com os caminhos.
+    - Valida se o diretório existe.
+    - Coleta apenas arquivos (não diretórios).
+    - Retorna uma tupla com os caminhos dos arquivos e o caminho.
+    """
+
+    # Adicicionando barra de progresso com rich
+    table = Table(title="Arquivos coletados")
+    headers = ["Caminho", "Nome do arquivo", "Tamanho (KB)"]
+    for header in headers:
+        table.add_column(header, style="magenta")
+
+    result = core.collect(path_data)
+    for file_ in result[0]:
+        size_in_kb = os.path.getsize(file_) / 1024
+        table.add_row(file_, file_.split("/")[-1], str(round(size_in_kb, 2)))
+
+    Console().print(table)

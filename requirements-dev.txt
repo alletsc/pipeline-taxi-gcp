@@ -3,6 +3,9 @@ ipdb
 pudb
 pytest
 pytest-watch
+click
+rich
+rich-click
 
 # Code Quality
 flake8
