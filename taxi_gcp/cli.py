@@ -2,7 +2,7 @@ import os
 
 import pkg_resources
 import rich_click as click
-from rich import print
+from rich import print  # noqa
 from rich.console import Console
 from rich.table import Table
 
@@ -29,8 +29,7 @@ def collect(path_data):
     """Coleta arquivos de um diretório e retorna uma tupla com os caminhos.
     - Valida se o diretório existe.
     - Coleta apenas arquivos (não diretórios).
-    - Retorna uma tupla com os caminhos dos arquivos e o caminho base fornecido.
-    - Adiciona uma barra de progresso com rich.
+    - Retorna uma tupla com os caminhos dos arquivos e o caminho.
     """
 
     # Adicicionando barra de progresso com rich
