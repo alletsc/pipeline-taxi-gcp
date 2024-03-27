@@ -6,6 +6,7 @@ pytest-watch
 click
 rich
 rich-click
+
 # Code Quality
 flake8
 pyproject-flake8
